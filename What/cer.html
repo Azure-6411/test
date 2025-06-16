@@ -1,0 +1,260 @@
+<!DOCTYPE html>
+<html lang="en" >
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Freaky Certificate Generator</title>
+  <style>
+    @import url('https://fonts.googleapis.com/css2?family=Orbitron:wght@700&display=swap');
+
+    body {
+      background: black;
+      color: #0ff;
+      font-family: 'Orbitron', monospace, sans-serif;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      padding: 40px 20px;
+      min-height: 100vh;
+      margin: 0;
+      user-select: none;
+    }
+    h1 {
+      font-size: 3.5rem;
+      text-transform: uppercase;
+      text-shadow:
+        0 0 5px #0ff,
+        0 0 10px #0ff,
+        0 0 20px #0ff,
+        0 0 40px #ff00de,
+        0 0 80px #ff00de;
+      margin-bottom: 0.2em;
+    }
+    h2 {
+      color: #f0f;
+      font-style: italic;
+      text-shadow: 0 0 10px #f0f;
+      margin: 0 0 1em;
+    }
+    .input-section {
+      margin-bottom: 20px;
+      width: 100%;
+      max-width: 600px;
+      display: flex;
+      justify-content: center;
+      gap: 10px;
+    }
+    input[type="text"] {
+      flex-grow: 1;
+      font-size: 1.5rem;
+      padding: 10px 15px;
+      border: none;
+      border-radius: 12px;
+      outline: none;
+      background: #111;
+      color: #0ff;
+      text-transform: uppercase;
+      box-shadow:
+        inset 0 0 10px #0ff;
+      font-family: 'Orbitron', monospace, sans-serif;
+    }
+    button {
+      font-size: 1.5rem;
+      padding: 10px 25px;
+      border: none;
+      border-radius: 12px;
+      background: #ff00de;
+      color: #fff;
+      font-weight: 700;
+      cursor: pointer;
+      text-transform: uppercase;
+      box-shadow:
+        0 0 10px #ff00de,
+        0 0 20px #ff00de;
+      transition: background 0.3s ease;
+    }
+    button:hover {
+      background: #d400b8;
+      box-shadow:
+        0 0 15px #ff00de,
+        0 0 30px #ff00de;
+    }
+    .certificate {
+      max-width: 700px;
+      background: linear-gradient(135deg, #0ff, #ff00de);
+      border: 6px solid #ff00de;
+      border-radius: 20px;
+      padding: 50px 60px;
+      color: black;
+      box-shadow:
+        0 0 20px #0ff,
+        0 0 30px #ff00de,
+        0 0 40px #ff00de inset;
+      user-select: text;
+      filter: drop-shadow(0 0 5px #ff00de);
+      position: relative;
+      overflow: hidden;
+      font-family: 'Orbitron', monospace, sans-serif;
+      text-align: center;
+    }
+    .certificate::before {
+      content: '';
+      position: absolute;
+      top: -50%;
+      left: -25%;
+      width: 150%;
+      height: 200%;
+      background: repeating-conic-gradient(from 45deg, #ff00de 0deg 10deg, #0ff 10deg 20deg);
+      opacity: 0.05;
+      animation: spin 12s linear infinite;
+      z-index: 0;
+    }
+    @keyframes spin {
+      to {
+        transform: rotate(360deg);
+      }
+    }
+    .certificate > * {
+      position: relative;
+      z-index: 1;
+    }
+    .certificate h1 {
+      font-size: 4rem;
+      margin-bottom: 0.3em;
+      color: #000;
+      text-shadow:
+        2px 2px 0 #ff00de,
+        -2px -2px 0 #0ff;
+    }
+    .certificate .subtitle {
+      font-size: 1.5rem;
+      font-style: italic;
+      color: #111;
+      margin-bottom: 1em;
+      text-shadow:
+        1px 1px 0 #ff00de;
+    }
+    .recipient {
+      font-size: 3rem;
+      font-weight: 900;
+      color: #000;
+      text-transform: uppercase;
+      margin: 0 0 1.5em;
+      letter-spacing: 0.15em;
+      text-shadow:
+        3px 3px 0 #0ff,
+        -3px -3px 0 #ff00de;
+    }
+    .description {
+      font-size: 1.2rem;
+      font-weight: 600;
+      color: #111;
+      margin-bottom: 2em;
+      text-shadow:
+        1px 1px 0 #0ff;
+    }
+    .date {
+      font-size: 1rem;
+      font-weight: 600;
+      color: #222;
+      margin-bottom: 3em;
+    }
+    .signature {
+      display: flex;
+      justify-content: space-between;
+      padding: 0 40px;
+      font-weight: 700;
+      color: #111;
+      text-shadow:
+        1px 1px 0 #ff00de;
+      letter-spacing: 0.1em;
+    }
+    .signature div {
+      border-top: 3px solid #0ff;
+      padding-top: 8px;
+      width: 180px;
+      user-select: none;
+    }
+    #downloadBtn {
+      margin-top: 30px;
+      background: #0ff;
+      color: #000;
+      font-weight: 900;
+      box-shadow:
+        0 0 15px #0ff,
+        0 0 30px #0ff;
+      transition: background 0.3s ease;
+    }
+    #downloadBtn:hover {
+      background: #00caca;
+      box-shadow:
+        0 0 25px #00caca,
+        0 0 50px #00caca;
+    }
+  </style>
+</head>
+<body>
+
+  <h1>Freaky Certificate Generator</h1>
+  <h2>Enter your friend’s name below:</h2>
+  
+  <div class="input-section">
+    <input type="text" id="nameInput" placeholder="FRIEND'S NAME" />
+    <button id="generateBtn">Generate</button>
+  </div>
+  
+  <div id="certificate" class="certificate" style="display:none;">
+    <h1>Certificate of Chaos</h1>
+    <div class="subtitle">This certifies that the legend known as</div>
+    <div class="recipient" id="recipientName">[NAME]</div>
+    <div class="description">
+      Has unleashed absolute mayhem in the digital realm.<br />
+      Certified Freak and Code Anarchist.
+    </div>
+    <div class="date" id="certDate"></div>
+    <div class="signature">
+      <div>Alex “Glitch” Ryder</div>
+      <div>Nova “Codebreaker” Quinn</div>
+    </div>
+  </div>
+
+  <button id="downloadBtn" style="display:none;">Download Freaky PNG</button>
+
+  <script src="https://cdn.jsdelivr.net/npm/html2canvas@1.4.1/dist/html2canvas.min.js"></script>
+  <script>
+    const nameInput = document.getElementById('nameInput');
+    const generateBtn = document.getElementById('generateBtn');
+    const certificate = document.getElementById('certificate');
+    const recipientName = document.getElementById('recipientName');
+    const certDate = document.getElementById('certDate');
+    const downloadBtn = document.getElementById('downloadBtn');
+
+    function formatDate(date) {
+      return date.toLocaleDateString(undefined, { year: 'numeric', month: 'long', day: 'numeric' });
+    }
+
+    generateBtn.addEventListener('click', () => {
+      const name = nameInput.value.trim();
+      if (!name) {
+        alert("You gotta enter a name, dude!");
+        return;
+      }
+      recipientName.textContent = name.toUpperCase();
+      certDate.textContent = "Date: " + formatDate(new Date());
+      certificate.style.display = 'block';
+      downloadBtn.style.display = 'inline-block';
+      window.scrollTo({ top: certificate.offsetTop, behavior: 'smooth' });
+    });
+
+    downloadBtn.addEventListener('click', () => {
+      html2canvas(certificate).then(canvas => {
+        const link = document.createElement('a');
+        link.download = 'freaky_certificate.png';
+        link.href = canvas.toDataURL('image/png');
+        link.click();
+      });
+    });
+  </script>
+
+</body>
+</html>
