@@ -19,7 +19,7 @@
 .Youtube:active {
     height: 40px;
     width: 200px;
-    background-color: darkred;
+    background: linear-gradient(to right, #cc0000, #993399);
     color: white;
     border-radius: 40px;
 }
