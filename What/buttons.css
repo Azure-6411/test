@@ -1,0 +1,40 @@
+.Youtube {
+    height: 40px;
+    width: 200px;
+    background-color: red;
+    color: white;
+    border-radius: 40px;
+    border: none;
+    font-family: sans-serif;
+}
+.Tweet {
+    height: 40px;
+    width: 160px;
+    background-color: #1DA1F2;
+    color: white;
+    border-radius: 40px;
+    font-family: sans-serif;
+    border: none;
+}
+.Youtube:active {
+    height: 40px;
+    width: 200px;
+    background-color: darkred;
+    color: white;
+    border-radius: 40px;
+}
+.Tweet:active {
+    height: 40px;
+    width: 160px;
+    background-color: #15679b;
+    color: white;
+    border-radius: 40px;
+}
+.Youtube:hover {
+    cursor: pointer;
+    background-color: #cc0000;
+}
+.Tweet:hover {
+    cursor: pointer;
+    background-color: #1991db;
+}
